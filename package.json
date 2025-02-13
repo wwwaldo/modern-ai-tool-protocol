@@ -1,0 +1,26 @@
+{
+  "name": "modern-ai-tool-protocol",
+  "version": "0.1.0",
+  "description": "A modern, robust protocol for AI tool interactions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "keywords": [
+    "ai",
+    "tools",
+    "protocol",
+    "typescript",
+    "openai",
+    "anthropic"
+  ],
+  "author": "Community",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
