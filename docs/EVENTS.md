@@ -101,7 +101,16 @@ interface EventPayloadMap {
 
   // ... other event payloads
 }
-```
+
+// TODO: Event Queue Handling (v0.2.0)
+// The protocol will explicitly define:
+// 1. Maximum queue size limits
+// 2. Event dropping behavior (FIFO)
+// 3. Optional event priorities
+// 4. Back-pressure mechanisms
+//
+// For now, implementations should handle queue limits 
+// based on their specific needs.
 
 ## Usage Example
 
