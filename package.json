@@ -1,11 +1,12 @@
 {
   "name": "modern-ai-tool-protocol",
   "version": "0.1.0",
-  "description": "A modern, robust protocol for AI tool interactions",
+  "description": "A comprehensive, type-safe protocol for AI tool interactions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -23,6 +24,7 @@
   ],
   "author": "Community",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.0.0",
     "@types/node": "^20.0.0",
