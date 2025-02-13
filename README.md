@@ -8,8 +8,6 @@ Current AI tool protocols (OpenAI, Anthropic, etc.) are too simplistic for real-
 
 ## Quick Start
 
-Check out the full specification in [PROTOCOL.md](./docs/PROTOCOL.md).
-
 ```typescript
 // Current AI Tool Protocols
 type CurrentTool = {
@@ -36,15 +34,116 @@ type ModernTool = {
 - 📦 State Management
 - 🔄 Version Control
 
+## Documentation
+
+- [Full Protocol Specification](./docs/PROTOCOL.md)
+- [Migration Guide](./docs/MIGRATING.md)
+- [Comparison with Other Protocols](./docs/COMPARISON.md)
+
+## Real-World Examples
+
+### 1. Image Generation
+```typescript
+const imageGen = createTool<ImageInput, ImageOutput>({
+  version: "1.0.0",
+  documentation: { ... },
+  errors: {
+    possibleErrors: [{
+      code: "NSFW_CONTENT",
+      isRetryable: false
+    }]
+  },
+  execution: {
+    supportsProgress: true,
+    canBeCancelled: true
+  }
+});
+```
+[Full Example](./examples/real-world/image-generation.ts)
+
+### 2. Video Transcription
+```typescript
+const transcriber = createTool<TranscriptionInput, TranscriptionOutput>({
+  version: "1.0.0",
+  execution: {
+    estimatedDuration: { min: 30, max: 300, unit: "s" },
+    supportsProgress: true
+  },
+  state: {
+    persistsBetweenCalls: true,
+    sideEffects: [{
+      type: "filesystem",
+      isReversible: true
+    }]
+  }
+});
+```
+[Full Example](./examples/real-world/video-transcription.ts)
+
 ## Why This Matters
 
 Current AI tool protocols are holding back real-world AI applications. We need:
 
-1. **Better Error Handling**: Stop treating errors as strings
-2. **Proper Async Support**: Long-running operations are the norm
-3. **State Management**: Tools have context and side effects
-4. **Rich Documentation**: More than just a description string
-5. **Version Control**: Tools evolve, we need to handle that
+1. **Better Error Handling**
+   - Typed errors with retry strategies
+   - User-friendly messages
+   - Fallback behaviors
+
+2. **Proper Async Support**
+   - Progress reporting
+   - Cancellation
+   - Parallel execution
+   - ETA estimates
+
+3. **State Management**
+   - Context persistence
+   - Side effect tracking
+   - Required dependencies
+
+4. **Rich Documentation**
+   - Examples with context
+   - Known limitations
+   - Cost implications
+   - Version information
+
+5. **Type Safety**
+   - Full TypeScript support
+   - Compile-time checking
+   - Better developer experience
+
+## Comparison with Existing Protocols
+
+| Feature | Modern Protocol | OpenAI | Anthropic |
+|---------|----------------|---------|-----------|
+| Type Safety | ✅ | ❌ | ❌ |
+| Error Handling | ✅ | ❌ | ❌ |
+| Async Support | ✅ | ❌ | ❌ |
+| State Management | ✅ | ❌ | ❌ |
+| Documentation | ✅ | ❌ | ❌ |
+
+[Full Comparison](./docs/COMPARISON.md)
+
+## Getting Started
+
+1. **Install**
+   ```bash
+   npm install modern-ai-tool-protocol
+   ```
+
+2. **Create a Tool**
+   ```typescript
+   import { createTool } from 'modern-ai-tool-protocol';
+
+   const myTool = createTool({
+     version: "1.0.0",
+     // ... configuration
+   });
+   ```
+
+3. **Use with AI**
+   ```typescript
+   const result = await myTool.execute(input);
+   ```
 
 ## Contributing
 
@@ -54,6 +153,23 @@ This is a community effort to improve AI tool interactions. We welcome:
 - 📝 Documentation improvements
 - 🐛 Bug reports
 - 🤝 Implementation examples
+
+## Next Steps
+
+1. Reference Implementation
+   - [ ] Core protocol library
+   - [ ] Testing utilities
+   - [ ] Example integrations
+
+2. Tooling
+   - [ ] TypeScript types
+   - [ ] Validation helpers
+   - [ ] Migration tools
+
+3. Documentation
+   - [ ] Best practices
+   - [ ] Performance tips
+   - [ ] Security guidelines
 
 ## License
 
